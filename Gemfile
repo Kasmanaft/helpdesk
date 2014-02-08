@@ -18,11 +18,12 @@ group :development do
 end
 
 group :test do
-  gem 'rspec'
+  gem 'rspec-rails'
   gem 'database_cleaner'
   gem 'shoulda-matchers'
   gem 'shoulda-context'
   gem 'cucumber'
+  gem 'factory_girl_rails'
 end
 
 group :test, :development do
