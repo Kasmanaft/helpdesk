@@ -1,9 +1,13 @@
-%h2 Forgot your password?
-= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
-  = devise_error_messages!
-  %div
-    = f.label :email
-    %br/
-    = f.email_field :email, :autofocus => true
-  %div= f.submit "Send me reset password instructions"
-= render "devise/shared/links"
+.container-fluid
+  .col-md-3
+  .jumbotron.form
+    %h2 Forgot your password?
+    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+      = devise_error_messages!
+      .input-group
+        %span.input-group-addon
+          %span.glyphicon.glyphicon-envelope
+        = f.email_field :email, class: "form-control", placeholder: "Email"
+      = f.submit "Send me reset password instructions", class: 'btn btn-info'
+    = render "devise/shared/links"
+  .col-md-3
