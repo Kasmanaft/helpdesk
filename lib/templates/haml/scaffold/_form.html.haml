@@ -1,0 +1,10 @@
+%div
+  .col-md-3
+  .jumbotron.form
+    %h2 <%=singular_table_name.humanize %>
+    = form_for @<%= singular_table_name %> do |f|
+      <%- attributes.each do |attribute| -%>
+        = f.<%= attribute.reference? ? :association : :input %> :<%= attribute.name %>
+      <%- end -%>
+      = f.submit "Submit", class: 'btn btn-primary'
+  .col-md-3

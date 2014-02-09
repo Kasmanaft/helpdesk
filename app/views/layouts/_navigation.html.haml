@@ -1,0 +1,17 @@
+%nav{class: "navbar navbar-default", role: "navigation"}
+  .container-fluid
+    .navbar-header
+      %button{type: "button", class: "navbar-toggle", 'data-toggle'=>"collapse", 'data-target'=>"#navbar-collapse"}
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+
+    #navbar-collapse.collapse.navbar-collapse
+      %ul.nav.navbar-nav
+        %li=link_to 'Home', '#'
+      %ul.nav.navbar-nav.navbar-right
+        %li
+          =link_to destroy_staff_session_path, method: :delete do
+            %code Logout
+

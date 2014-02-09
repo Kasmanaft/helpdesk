@@ -1,0 +1,7 @@
+%div
+  .col-md-3
+  .jumbotron.form
+    %h2 Ticket
+    = form_for @ticket do |f|
+      = f.submit "Submit", class: 'btn btn-primary'
+  .col-md-3

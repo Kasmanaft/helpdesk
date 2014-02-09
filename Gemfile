@@ -8,7 +8,7 @@ gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder'
-gem 'haml'
+gem 'haml-rails'
 gem 'devise'
 gem 'bootstrap-sass'
 
@@ -22,8 +22,10 @@ group :test do
   gem 'database_cleaner'
   gem 'shoulda-matchers'
   gem 'shoulda-context'
-  gem 'cucumber'
+  gem 'cucumber-rails', require: false
+  gem 'capybara'
   gem 'factory_girl_rails'
+  gem 'webrat'
 end
 
 group :test, :development do
