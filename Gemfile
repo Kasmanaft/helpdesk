@@ -23,9 +23,8 @@ group :test do
   gem 'shoulda-matchers'
   gem 'shoulda-context'
   gem 'cucumber-rails', require: false
-  gem 'capybara'
   gem 'factory_girl_rails'
-  gem 'webrat'
+  gem "email_spec"
 end
 
 group :test, :development do

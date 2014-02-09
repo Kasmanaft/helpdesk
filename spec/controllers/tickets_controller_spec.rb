@@ -19,21 +19,19 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe TicketsController do
-
-  # This should return the minimal set of attributes required to create a valid
-  # Ticket. As you add validations to Ticket, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) { {  } }
+  let(:valid_attributes) { { customer_name: 'Customer name',
+                             customer_email: 'email@customer.name',
+                             description: 'Such huge problem' } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # TicketsController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
+  #let(:valid_session) { staff_signed_in? }
 
   describe "GET index" do
     it "assigns all tickets as @tickets" do
       ticket = Ticket.create! valid_attributes
-      get :index, {}, valid_session
+      get :index, {} #, valid_session
       assigns(:tickets).should eq([ticket])
     end
   end
@@ -41,14 +39,14 @@ describe TicketsController do
   describe "GET show" do
     it "assigns the requested ticket as @ticket" do
       ticket = Ticket.create! valid_attributes
-      get :show, {:id => ticket.to_param}, valid_session
+      get :show, {:id => ticket.to_param}
       assigns(:ticket).should eq(ticket)
     end
   end
 
   describe "GET new" do
     it "assigns a new ticket as @ticket" do
-      get :new, {}, valid_session
+      get :new, {}
       assigns(:ticket).should be_a_new(Ticket)
     end
   end
@@ -56,7 +54,7 @@ describe TicketsController do
   describe "GET edit" do
     it "assigns the requested ticket as @ticket" do
       ticket = Ticket.create! valid_attributes
-      get :edit, {:id => ticket.to_param}, valid_session
+      get :edit, {:id => ticket.to_param}#, valid_session
       assigns(:ticket).should eq(ticket)
     end
   end
@@ -65,18 +63,18 @@ describe TicketsController do
     describe "with valid params" do
       it "creates a new Ticket" do
         expect {
-          post :create, {:ticket => valid_attributes}, valid_session
+          post :create, {:ticket => valid_attributes}
         }.to change(Ticket, :count).by(1)
       end
 
       it "assigns a newly created ticket as @ticket" do
-        post :create, {:ticket => valid_attributes}, valid_session
+        post :create, {:ticket => valid_attributes}
         assigns(:ticket).should be_a(Ticket)
         assigns(:ticket).should be_persisted
       end
 
       it "redirects to the created ticket" do
-        post :create, {:ticket => valid_attributes}, valid_session
+        post :create, {:ticket => valid_attributes}
         response.should redirect_to(Ticket.last)
       end
     end
@@ -85,14 +83,14 @@ describe TicketsController do
       it "assigns a newly created but unsaved ticket as @ticket" do
         # Trigger the behavior that occurs when invalid params are submitted
         Ticket.any_instance.stub(:save).and_return(false)
-        post :create, {:ticket => {  }}, valid_session
+        post :create, {:ticket => {  }}
         assigns(:ticket).should be_a_new(Ticket)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Ticket.any_instance.stub(:save).and_return(false)
-        post :create, {:ticket => {  }}, valid_session
+        post :create, {:ticket => {  }}
         response.should render_template("new")
       end
     end
@@ -107,18 +105,18 @@ describe TicketsController do
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         Ticket.any_instance.should_receive(:update).with({ "these" => "params" })
-        put :update, {:id => ticket.to_param, :ticket => { "these" => "params" }}, valid_session
+        put :update, {:id => ticket.to_param, :ticket => { "these" => "params" }}
       end
 
       it "assigns the requested ticket as @ticket" do
         ticket = Ticket.create! valid_attributes
-        put :update, {:id => ticket.to_param, :ticket => valid_attributes}, valid_session
+        put :update, {:id => ticket.to_param, :ticket => valid_attributes}
         assigns(:ticket).should eq(ticket)
       end
 
       it "redirects to the ticket" do
         ticket = Ticket.create! valid_attributes
-        put :update, {:id => ticket.to_param, :ticket => valid_attributes}, valid_session
+        put :update, {:id => ticket.to_param, :ticket => valid_attributes}
         response.should redirect_to(ticket)
       end
     end
@@ -128,7 +126,7 @@ describe TicketsController do
         ticket = Ticket.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Ticket.any_instance.stub(:save).and_return(false)
-        put :update, {:id => ticket.to_param, :ticket => {  }}, valid_session
+        put :update, {:id => ticket.to_param, :ticket => {  }}
         assigns(:ticket).should eq(ticket)
       end
 
@@ -136,25 +134,11 @@ describe TicketsController do
         ticket = Ticket.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Ticket.any_instance.stub(:save).and_return(false)
-        put :update, {:id => ticket.to_param, :ticket => {  }}, valid_session
+        put :update, {:id => ticket.to_param, :ticket => {  }}
         response.should render_template("edit")
       end
     end
   end
 
-  describe "DELETE destroy" do
-    it "destroys the requested ticket" do
-      ticket = Ticket.create! valid_attributes
-      expect {
-        delete :destroy, {:id => ticket.to_param}, valid_session
-      }.to change(Ticket, :count).by(-1)
-    end
-
-    it "redirects to the tickets list" do
-      ticket = Ticket.create! valid_attributes
-      delete :destroy, {:id => ticket.to_param}, valid_session
-      response.should redirect_to(tickets_url)
-    end
-  end
 
 end

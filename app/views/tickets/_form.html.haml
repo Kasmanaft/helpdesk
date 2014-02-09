@@ -1,7 +1,15 @@
-%div
-  .col-md-3
-  .jumbotron.form
-    %h2 Ticket
-    = form_for @ticket do |f|
-      = f.submit "Submit", class: 'btn btn-primary'
-  .col-md-3
+= form_for @ticket do |f|
+  =# devise_error_messages!
+  .input-group
+    %span.input-group-addon
+      %span.glyphicon.glyphicon-user
+    = f.text_field :customer_name, class: "form-control", placeholder: "Your Name"
+  .input-group
+    %span.input-group-addon
+      %span.glyphicon.glyphicon-envelope
+    = f.email_field :customer_email, class: "form-control", placeholder: "Your Email"
+  .input-group
+    %span.input-group-addon
+      %span.glyphicon.glyphicon-comment
+    = f.text_area :description, class: "form-control", placeholder: "Describe your problem here:", rows: 6
+  = f.submit "Submit", class: 'btn btn-primary'

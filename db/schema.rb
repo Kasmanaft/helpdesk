@@ -27,8 +27,16 @@ ActiveRecord::Schema.define(version: 20140209133645) do
   add_index "staffs", ["reset_password_token"], name: "index_staffs_on_reset_password_token", unique: true, using: :btree
 
   create_table "tickets", force: true do |t|
+    t.string   "customer_name",  default: "", null: false
+    t.string   "customer_email", default: "", null: false
+    t.text     "description",                 null: false
+    t.string   "status",         default: "", null: false
+    t.string   "uid",            default: "", null: false
+    t.integer  "staff_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "tickets", ["staff_id"], name: "index_tickets_on_staff_id", using: :btree
 
 end
